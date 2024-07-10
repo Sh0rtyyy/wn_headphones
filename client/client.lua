@@ -3,7 +3,7 @@ local headPhones = nil
 
 exports.ox_target:addGlobalPlayer({
     {
-        icon = 'fas-fa headphones',
+        icon = 'fa-solid fa-headphones',
         label = Config.Language['target'],
         onSelect = function(data)
             local hasItem = lib.callback.await('wn_headphones:hasItem')
