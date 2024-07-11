@@ -27,7 +27,7 @@ RegisterCommand("removeheadphones", function(source, args, rawCommand)
     local src = source
     local player = ""
     
-    if not IsAdmin then return end
+    if not IsAdmin(src) then return end
 
     for _, v in ipairs(args) do
         player = v
