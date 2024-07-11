@@ -1,39 +1,80 @@
 local hasHeadphones = false
 local headPhones = nil
 
-exports.ox_target:addGlobalPlayer({
-    {
-        icon = 'fa-solid fa-headphones',
-        label = Config.Language['target'],
-        onSelect = function(data)
-            local hasItem = lib.callback.await('wn_headphones:hasItem')
-            if not hasItem then
-                Notify("error", "Server", Config.Language['no_item'], icon, 2000)
-                return
-            end
-            if lib.progressBar({
-                duration = Config.Duration,
-                label = Config.Language['progress'],
-                useWhileDead = false,
-                canCancel = true,
-                disable = {
-                    move = true,
-                    car = true,
-                    combat = true,
-                    mouse = false
-                },
-                anim = {
-                    dict = "anim@amb@clubhouse@tutorial@bkr_tut_ig3@",
-                    clip = 'machinic_loop_mechandplayer',
-                },
+if Config.Target == 'ox_target' then
+    exports.ox_target:addGlobalPlayer({
+        {
+            icon = 'fas fa-headphones',
+            label = Config.Language['target'],
+            onSelect = function(data)
+                local hasItem = lib.callback.await('wn_headphones:hasItem')
+                if not hasItem then
+                    Notify("error", "Server", Config.Language['no_item'], icon, 2000)
+                    return
+                end
+                if lib.progressBar({
+                    duration = Config.Duration,
+                    label = Config.Language['progress'],
+                    useWhileDead = false,
+                    canCancel = true,
+                    disable = {
+                        move = true,
+                        car = true,
+                        combat = true,
+                        mouse = false
+                    },
+                    anim = {
+                        dict = "anim@amb@clubhouse@tutorial@bkr_tut_ig3@",
+                        clip = 'machinic_loop_mechandplayer',
+                    },
 
-            }) then
-                TriggerServerEvent("wn_headphones:muteplayer", GetPlayerServerId(NetworkGetPlayerIndexFromPed(data.entity)))
-            end
-        end,
-        distance = 1,
-    }
-})
+                }) then
+                    TriggerServerEvent("wn_headphones:muteplayer", GetPlayerServerId(NetworkGetPlayerIndexFromPed(data.entity)))
+                end
+            end,
+            distance = 2,
+        }
+    })
+else
+    exports['qb-target']:AddGlobalPlayer({
+        options = {
+          {
+            num = 1,
+            type = "client",
+            icon = 'fas fa-headphones',
+            label = Config.Language['target'],
+            targeticon = 'fas fa-headphones',
+            onSelect = function(data)
+                local hasItem = lib.callback.await('wn_headphones:hasItem')
+                if not hasItem then
+                    Notify("error", "Server", Config.Language['no_item'], icon, 2000)
+                    return
+                end
+                if lib.progressBar({
+                    duration = Config.Duration,
+                    label = Config.Language['progress'],
+                    useWhileDead = false,
+                    canCancel = true,
+                    disable = {
+                        move = true,
+                        car = true,
+                        combat = true,
+                        mouse = false
+                    },
+                    anim = {
+                        dict = "anim@amb@clubhouse@tutorial@bkr_tut_ig3@",
+                        clip = 'machinic_loop_mechandplayer',
+                    },
+
+                }) then
+                    TriggerServerEvent("wn_headphones:muteplayer", GetPlayerServerId(NetworkGetPlayerIndexFromPed(data.entity)))
+                end
+            end,
+          }
+        },
+        distance = 2,
+      })
+end
 
 RegisterNetEvent("wn_headphones:muteplayerC")
 AddEventHandler("wn_headphones:muteplayerC", function()

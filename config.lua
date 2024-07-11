@@ -1,10 +1,5 @@
 Config = {}
-Config.Locale = 'en'
-
 Config.Framework = "ESX" -- ESX or qbcore
-
-Config.EnableDebug = false -- Enable/Disable prints and showing box of ox_target
-
 Config.Target = "ox_target" -- ox_target, qb-target
 Config.Notify = "ox_lib" -- ox_lib, qbcore or ESX
 Config.Duration = 6000 -- How long will the player search the pleace IN MS
